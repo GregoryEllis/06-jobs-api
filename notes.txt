@@ -1,0 +1,17 @@
+// NEVER STORE USER PASSWORDS AS STRINGS.
+// HASH THE PASSWORDS INSTEAD - which simple terms means as generating random bits and combining them w/ the password.
+// HASH - even if someone breaks into our DB and steals our data they won't get the actually password values they will get the hash values instead. Which prevent them from easily reusing them later.
+// This does not mean you should protect your DB.
+
+// // Here we generate salt which means random bits genSalt() creates these bits the bigger the number the more random bits we will get. This also means the more secure our password will be. The more rounds(or numbers) that are created the more processing power is needed.
+const salt = await bcrypt.genSalt(10);
+
+
+// Looking for the password we want to hash and the salt. This is stored in hashedPassword and this is what we can safely in the DB. 
+const hashedPassword = await bcrypt.hash(password, salt)
+
+// When it comes to the secret string you can get away with 'jwtSecert' but a more proper setup is generating a more secure key.
+// Here you are looking for the encryption key more specifically security level 256-bit.
+// When you get the value place it in the .env file 
+// To do this use allkeysgenerator.com
+// JWT() when it comes to JWT you can use the secert string but to have.
